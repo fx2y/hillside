@@ -45,7 +45,7 @@ public class HttpControllerTest {
     public void greetAuthenticatedGreeting() {
         Mono<Greeting> helloMono = this.authenticatedClient.getAuthenticatedGreeting();
         StepVerifier.create(helloMono)
-                .expectNext()
+                .expectNextMatches(g -> g.getMessage().contains("Hello username"))
                 .verifyComplete();
     }
 }
